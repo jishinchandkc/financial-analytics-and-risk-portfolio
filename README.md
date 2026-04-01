@@ -24,13 +24,13 @@ This repository contains an end-to-end SQL-based analytics ecosystem. It leverag
 ---
 
 ## 💳 Project 2: Credit Card Transaction Intelligence
-[cite_start]**Objective:** Extract actionable business insights from credit card usage patterns, focusing on market share, growth, and customer milestones[cite: 1, 2].
+**Objective:** Extract actionable business insights from credit card usage patterns, focusing on market share, growth, and customer milestones.
 
 ### Key Business Use Cases
-* [cite_start]**Market Share Analysis:** Identified top 5 cities by spend and calculated their percentage contribution to global revenue[cite: 10, 22].
-* [cite_start]**Milestone Tracking:** Engineered a cumulative spend model using `SUM(...) OVER(...)` to trigger alerts when a card tier reaches a **1,000,000 unit threshold**[cite: 49, 51, 57].
-* [cite_start]**Growth Analytics:** Implemented `LAG()` window functions to identify the highest **Month-over-Month (MoM) growth** segments[cite: 179, 180, 196, 203].
-* [cite_start]**Customer Velocity:** Calculated "Acquisition Velocity" by measuring the `DATEDIFF` between a city's 1st and 500th transaction[cite: 223, 234].
+* **Market Share Analysis:** Identified top 5 cities by spend and calculated their percentage contribution to global revenue.
+* **Milestone Tracking:** Engineered a cumulative spend model using `SUM(...) OVER(...)` to trigger alerts when a card tier reaches a **1,000,000 unit threshold**.
+* **Growth Analytics:** Implemented `LAG()` window functions to identify the highest **Month-over-Month (MoM) growth** segments.
+* **Customer Velocity:** Calculated "Acquisition Velocity" by measuring the `DATEDIFF` between a city's 1st and 500th transaction.
 
 ---
 
