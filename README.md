@@ -1,31 +1,45 @@
-# Behavioral Risk & Anomaly Detection Pipeline
+# Data Engineering & Financial Intelligence Portfolio
 
-## Project Objective
-This project engineers a Medallion Architecture (Bronze, Silver, Gold) data pipeline in SQL Server to detect coordinated anomalous behavior within a high-volume application. By establishing rolling statistical baselines, the system automatically flags irregular spikes in user registration and engagement, acting as a foundational model for bot network detection, fraud rings, or coordinated application manipulation.
+This repository contains an end-to-end SQL-based analytics ecosystem. It leverages **Medallion Architecture** to solve two distinct industrial challenges: **Behavioral Risk Mitigation** (Bot Detection) and **Credit Card Transaction Intelligence** (Financial Growth & Lifecycle Modeling).
 
-## Technical Stack
+---
+
+## 🚀 Core Technical Stack
 * **Database:** Microsoft SQL Server (T-SQL)
-* **Data Generation:** Python (Pandas, NumPy)
-* **Key Techniques:** Medallion Architecture, ETL, Window Functions, Statistical Baselines, Referential Integrity.
+* **Data Orchestration:** Python (Pandas, NumPy) for synthetic high-volume generation.
+* **Advanced SQL:** Window Functions (`RANK`, `LAG`, `SUM OVER`), CTEs, Medallion ETL, and Statistical Baselines.
 
-## Architecture & Logic Flow
+---
 
-### 1. Bronze Layer (Raw Ingestion)
-* Simulated ingestion of 55,000+ raw application events and user profiles. 
-* Data is loaded "as-is" utilizing highly optimized `BULK INSERT` operations to handle scale without choking database memory.
+## 🛡️ Project 1: Behavioral Risk & Anomaly Pipeline
+**Objective:** Detect coordinated bot networks and fraud rings within high-volume application logs.
 
-### 2. Silver Layer (ETL & Standardization)
-* **Deduplication:** Implemented `ROW_NUMBER()` window functions partitioned by user IDs to permanently filter redundant registrations.
-* **Type Casting & Cleansing:** Converted unstructured string data into strict `DATETIME` and `BIT` boolean structures. Handled missing categorical data via `ISNULL` fallbacks.
-* **Referential Integrity:** Enforced strict `INNER JOIN` conditions to drop orphaned event logs belonging to users who failed the initial deduplication and validation checks.
+### Architecture & Logic
+1.  **Bronze (Raw):** Ingestion of 55,000+ raw events using optimized `BULK INSERT`.
+2.  **Silver (Clean):** * **Deduplication:** Utilized `ROW_NUMBER()` to eliminate redundant registrations.
+    * **Integrity:** Enforced `INNER JOIN` logic to purge orphaned event logs.
+3.  **Gold (Analytics):** * **Risk Baselines:** Established 14-day rolling historical averages using `AVG(...) OVER(...)`.
+    * **Bot Detection:** Applied `CASE` logic to flag regional spikes exceeding 10x the norm.
 
-### 3. Gold Layer (Risk Analytics)
-* Deployed a `CREATE VIEW` structure to serve actionable intelligence to downstream BI tools.
-* Utilized `AVG(...) OVER(...)` window functions to establish a rolling 14-day historical baseline for specific geographic nodes.
-* Applied conditional logic (`CASE` statements) to flag behavioral spikes that deviate mathematically from the baseline (e.g., volume spikes > 10x the regional norm combined with absolute volume thresholds to eliminate statistical noise).
+---
 
-## Execution Instructions
-To reproduce this environment locally:
-1. Run the Python script in `/01_Data_Generation` to generate the raw datasets. 
-2. Execute the SQL scripts sequentially from `/02_Bronze_Layer` through `/04_Gold_Layer` within SQL Server Management Studio (SSMS).
-3. Query the `gold_risk_bot_detection` view to isolate the injected bot networks.
+## 💳 Project 2: Credit Card Transaction Intelligence
+[cite_start]**Objective:** Extract actionable business insights from credit card usage patterns, focusing on market share, growth, and customer milestones[cite: 1, 2].
+
+### Key Business Use Cases
+* [cite_start]**Market Share Analysis:** Identified top 5 cities by spend and calculated their percentage contribution to global revenue[cite: 10, 22].
+* [cite_start]**Milestone Tracking:** Engineered a cumulative spend model using `SUM(...) OVER(...)` to trigger alerts when a card tier reaches a **1,000,000 unit threshold**[cite: 49, 51, 57].
+* [cite_start]**Growth Analytics:** Implemented `LAG()` window functions to identify the highest **Month-over-Month (MoM) growth** segments[cite: 179, 180, 196, 203].
+* [cite_start]**Customer Velocity:** Calculated "Acquisition Velocity" by measuring the `DATEDIFF` between a city's 1st and 500th transaction[cite: 223, 234].
+
+---
+
+## 📂 Repository Structure
+
+```text
+├── 01_Data_Generation          # Python scripts for synthetic data
+├── 02_Bronze_Layer             # Raw table DDL and Bulk Load scripts
+├── 03_Silver_Layer             # ETL, Cleansing, and Deduplication
+├── 04_Gold_Layer               # Risk Views and Statistical Baselines
+├── 05_Advanced_Analytics       # Bot velocity and "Burner Account" detection
+└── 06_Credit_Card_Case_Study   # Financial growth & milestone queries
