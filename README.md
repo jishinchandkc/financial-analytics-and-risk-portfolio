@@ -54,6 +54,9 @@ growth and customer milestones.
 
 ## Running it
 
-1. Run the generator in `/01_Data_Generation` to produce the raw datasets.
-2. Execute the SQL scripts in order, `/02_Bronze_Layer` through `/04_Gold_Layer`.
+1. Run the generator in `/01_Behavioral_Risk_Module/01_Data_Generation`
+   to produce the raw datasets.
+2. Execute the SQL scripts in `/01_Behavioral_Risk_Module`, folders
+   `02_Bronze_Layer` through `04_Gold_Layer`, in order.
 3. Query the `gold_risk_bot_detection` view to see the flagged networks.
+4. Card spend analysis is standalone in `/02_Credit_Card_Analytics_Module`.
